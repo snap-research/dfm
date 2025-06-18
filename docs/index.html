@@ -1,0 +1,432 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>DFM</title>
+  <meta name="description" content="Project page for 'Improving Progressive Generation with Decomposable Flow Matching.'">
+  <link rel="icon" href="./pics/wis_logo.jpg">
+  <link rel="stylesheet" href="./static/css/index.css" type="text/css">
+
+  <!-- Google Analytics -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-WLX2Z5QLG8');
+  </script>
+
+  <!-- jQuery for scroll position -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (localStorage.getItem("my_app_name_here-quote-scroll") != null) {
+        $(window).scrollTop(localStorage.getItem("my_app_name_here-quote-scroll"));
+ }
+      $(window).on("scroll", function () {
+        localStorage.setItem("my_app_name_here-quote-scroll", $(window).scrollTop());
+ });
+ });
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+ }
+
+     strong {
+              font-weight: bold;
+ }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #ffffff;
+      border-bottom: 1px solid #ccc;
+      z-index: 1000;
+      font-size: 14px;
+ }
+    .navbar a {
+      display: inline-block;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: #333;
+ }
+    .navbar a:hover {
+      background-color: #f2f2f2;
+ }
+
+    p {
+      font-size: 19px;
+ }
+    /* Title and Disclaimer */
+    .title {
+      font-size: 30px;
+      font-weight: bold;
+      text-align: center;
+      margin: 20px 0 10px 0;
+ }
+    .disclaimer-box {
+      border: 1px solid #ccc;
+      background-color: #fdfdfd;
+      padding: 15px;
+      margin: 20px auto;
+      width: 100%;
+      max-width: 1200px;
+      font-size: 20px;
+      color: #555;
+      border-left: 5px solid #e67e22;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+ }
+
+    /* Author Section */
+    .title-container {
+      background-color: #f3f3f3;
+      padding: 20px 0px;
+      text-align: center;
+ }
+    .author-container {
+      background-color: #f3f3f3;
+      text-align: center;
+      font-size: 18px;
+ }
+    .author-container .author a {
+      text-decoration: none;
+      color: #333;
+      margin: 0 0px;
+ }
+    .author-container .author a:hover {
+      text-decoration: underline;
+ }
+
+    /* Affiliations */
+    .affiliations-container {
+      background-color: #f3f3f3;
+      padding: 20px 0;
+      text-align: center;
+ }
+    .collabs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+ }
+    .rice-icon {
+      height: 40px;
+ }
+    .snap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+ }
+    .snap img {
+      height: 40px;
+ }
+
+    /* Resource Items */
+    .resources {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+ }
+    .resource-item {
+      text-align: center;
+ }
+    .resource-icon {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 8px;
+ }
+    .resource-text {
+      font-size: 14px;
+      color: #333;
+ }
+
+    /* Architecture Buttons & Images */
+    .architecture-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0;
+ }
+    .architecture-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+ }
+    .arch-btn {
+      padding: 8px 16px;
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+ }
+    .arch-btn:hover {
+      background-color: #e0e0e0;
+ }
+    .arch-btn.active {
+      background-color: #4285f4;
+      color: white;
+      border-color: #3367d6;
+ }
+    .architecture-images img {
+      display: none;
+ }
+    #arch-core {
+      display: block;
+ }
+
+    /* Sections */
+    .section {
+      font-size: 28px;
+      text-align: left;
+      margin: 30px auto 10px;
+      width: 100%;
+ }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 10px;
+ }
+    hr {
+      margin: 40px 0;
+ }
+    table {
+      border-collapse: collapse;
+      margin: 20px auto;
+ }
+    table td {
+      vertical-align: top;
+ }
+    p {
+      line-height: 1.6;
+ }
+    .bibtex-box {
+      background: #eee;
+      padding: 10px;
+      border-radius: 8px;
+ }
+  </style>
+
+            <script>
+            function showArchitecture(type, event) {
+              // Hide images
+              document.getElementById('arch-core').style.display = 'none';
+              document.getElementById('arch-training').style.display = 'none';
+              document.getElementById('arch-inference').style.display = 'none';
+
+              // Hide text
+              document.getElementById('arch-text-core').style.display = 'none';
+              document.getElementById('arch-text-training').style.display = 'none';
+              document.getElementById('arch-text-inference').style.display = 'none';
+
+              // Show selected content
+              document.getElementById('arch-' + type).style.display = 'block';
+              document.getElementById('arch-text-' + type).style.display = 'block';
+
+              // Highlight active button
+              const buttons = document.querySelectorAll('.arch-btn');
+              buttons.forEach(btn => btn.classList.remove('active'));
+              event.target.classList.add('active');
+ }
+          </script>
+</head>
+
+<body>
+
+  <div class="title-container">
+  <table width="999" border="0" align="center" class="menu" style="margin-bottom: 8px;">
+    <tbody>
+      <tr>
+        <td style="font-size: 17pt;" align="center">
+          <p class="title">Improving Progressive Generation with Decomposable Flow Matching</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <!-- Author Section -->
+  <div class="author-container">
+    <span class="author"><a target="_blank" href="https://moayedha.com/">Moayed Haji-Ali*</a></span>
+    <span class="author"><a target="_blank" href="https://www.willimenapace.com">Willi Menapace*</a></span>
+    <span class="author"><a target="_blank" href="https://skor.sh">Ivan Skorokhodov</a></span>
+    <span class="author"><a target="_blank" href="https://www.linkedin.com/in/arpitsah">Arpit Sahni</a></span>
+    <span class="author"><a target="_blank" href="https://stulyakov.com">Sergey Tulyakov</a></span>
+    <span class="author"><a target="_blank" href="https://vislang.ai/">Vicente Ordonez</a></span>
+    <span class="author"><a target="_blank" href="https://aliaksandrsiarohin.github.io/aliaksandr-siarohin-website">Aliaksandr Siarohin</a></span>
+  </div>
+
+  <!-- Affiliations -->
+  <div class="affiliations-container" style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+    <div class="snap">
+      <img src="./assets/logos/snap.png" alt="Snap Research Logo" style="height: 60px;">
+      <span>Snap Research</span>
+    </div>
+    <img class="rice-icon" src="./assets/logos/rice.svg" alt="Rice University Logo" style="height: 40px;">
+  </div>
+  <div class="disclaimer-box">
+    <strong>TL;DR:</strong> 
+ Decomposable Flow Matching (DFM) is a simple framework to progressively generate visual modalities scale-by-scale, achieving up to 50% faster convergence compared to Flow Matching.
+ Read the 
+    <a href="https://arxiv.org/abs/2311.18822" target="_blank" style="text-decoration: none; color: #333; font-weight: bold; margin-left: 5px;">
+ paper
+    </a> on<a href="https://arxiv.org/abs/2311.18822" style="margin-left: 10px; display: inline-block;"><img src="./assets/icons/arxiv-logo.png" alt="Paper" class="resource-icon" style="vertical-align: middle; margin-left: 5px;" /> </a>
+     &nbsp; for more details.
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <table width="1000" border="0" align="center">
+      <tbody>
+        <tr>
+          <td style="text-align:center;">
+            <video
+              width="1200"
+              autoplay
+              loop
+              muted
+              playsinline
+              onmouseover="this.controls=true;"
+              onmouseout="this.controls=false;"
+            >
+              <source src="./assets/figures/teaser/teaser_animation.mp4" type="video/mp4" />
+ Your browser does not support the video tag.
+            </video>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    &nbsp;
+
+    <hr>
+    <p class="section" id="method"><b>Method</b></p>
+    <p>
+      <strong>Decomposable Flow Matching (DFM):</strong> A generative model combining multiscale decomposition with Flow Matching. DFM progressively synthesizes different representation scales by generating coarse-structure scale first and incrementally refining it with finer scales.
+    </p>
+    <table align="center" width="1200" border="0">
+      <tbody>
+        <tr>
+          <td>
+        <div class="architecture-container">
+          <div class="architecture-images">
+            <img id="arch-core" src="./assets/figures/architecture/architecture_core.png" alt="Core architecture" height="500" style="display:block;" />
+            <img id="arch-training" src="./assets/figures/architecture/architecture_training.png" alt="Training architecture" height="500" style="display:none;" />
+            <img id="arch-inference" src="./assets/figures/architecture/architecture_inference.png" alt="Inference architecture" height="500" style="display:none;" />
+          </div>
+          <div class="architecture-text" style="margin: 10px 0;">
+            <p id="arch-text-core" style="display:block;">
+              <strong>DFM Architecture:</strong> Our framework (DFM) progressively synthesizes images by combining multiscale decomposition with Flow Matching. We modify the DiT architecture to use per-scale patchification and timestep-embedding layers while keeping the core DiT architecture untouched.
+            </p>
+            <p id="arch-text-training" style="display:none;">
+              <strong>DFM Training:</strong> We sample the stage count from a categorical distribution, then draw each stage flow-timestep from a logit-normal distribution biased toward lower noise in early stages, and finally train one DiT backbone to jointly predict all stage-wise velocities.
+            </p>
+            <p id="arch-text-inference" style="display:none;">
+              <strong>DFM Inference:</strong> We denoise the coarsest stage first for T<sup>1</sup> steps and activate next stages after the previous ones reach a predetermined per-stage noise threshold. This yields previewable outputs with earlier stages build global structure while later ones generate finer details. 
+            </p>
+          </div>
+          <div class="architecture-buttons">
+            <button class="arch-btn active" onclick="showArchitecture('core', event)" style="margin-right: 30px;">DFM Architecture</button>
+            <button class="arch-btn" onclick="showArchitecture('training', event)" style="margin-right: 30px;">Training</button>
+            <button class="arch-btn" onclick="showArchitecture('inference', event)">Inference</button>
+          </div>
+
+          </td>
+        </tr>
+</tbody>
+    </table>
+    <hr>
+        <p class="section" id="qual"><b>Results</b></p>
+        <table>
+        <tr>
+          <td>
+            <p style="margin-top: 20px; text-align: justify;">
+              Across image and video generation, DFM outperforms the best-performing baselines,
+ achieving the same Fréchet Distance DINO (FDD) of Flow Matching baselines with up to 2x less training compute.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <img src="./assets/figures/results/convergance_fdd_plot.png" alt="" width="1000" />
+          </td>
+        </tr>
+        </table>
+      
+    <br>
+    <hr>
+
+    <p class="section" id="qual"><b>Qualitative Results</b></p>
+    <!-- <p class="section" id="flux" style="font-size: 120%;"><b>FLUX Finetuning with DFM</b></p> -->
+    <p>
+      <strong>Large-Scale Finetuning:</strong> Finetuning FLUX-dev with DFM (FLUX-DFM) achieves superior results than finetuning with standard full-finetuning (DFM-FT)
+ for the same training compute.
+    </p>
+    <table>
+      <tr>
+        <td>
+          <img src="./assets/figures/flux_comparison/qualitatives.png" alt="" width="800" />
+        </td>
+      </tr>
+    </table>
+
+        <!-- <p class="section" id="flux" style="font-size: 120%;"><b>FLUX Finetuning with DFM</b></p> -->
+    <p>
+      <strong>Training From Scratch for Image Generation:</strong> When trained from scratch on ImageNet-1k 512px, DFM achieves better quality than baselines using the same training resources.
+    </p>
+    <table>
+      <tr>
+        <td>
+          <img src="./assets/figures/imagenet_512/qualitatives.png" alt="" width="800" />
+        </td>
+      </tr>
+    </table>
+
+    <!-- <p class="section" style="font-size: 120%; margin-top: 10px;" id="kinetics"><b>Video Generation: Kinetics-700 512px</b></p> -->
+    <p>
+      <strong>Training From Scratch for Video Generation:</strong> DFM is also suited for video generation, achieving better structural and visual quality than baselines when trained on the Kinetics-700 dataset with the same compute budget.
+    </p>
+    <table>
+      <tr>
+        <td>
+          <video width="800" autoplay loop muted playsinline>
+            <source src="./assets/figures/kinetics/qualitative.mp4" type="video/mp4">
+ Your browser does not support the video tag.
+          </video>
+        </td>
+      </tr>
+    </table>
+
+
+
+    <!-- <p class="section" id="flux" style="font-size: 120%;"><b>FLUX Finetuning with DFM</b></p> -->
+    <p>
+      <strong>Ablations:</strong> We found that DFM benefits from more sampling steps in the coarse-structure stage and needs only a few in the high-frequency stage, and it stays largely insensitive to the choice of sampling per-stage noise threshold, especially at high CFG values.
+    </p>
+    <table>
+      <tr>
+        <td style="display: flex; justify-content: space-between; gap: 10px;">
+          <img src="./assets/figures/ablations/sampling_steps.png" alt="" style="width: 49%;" />
+          <img src="./assets/figures/ablations/cfg_threshold.png" alt="" style="width: 49%;" />
+        </td>
+      </tr>
+    </table>
+
+    <p class="section" id="bibtex"><b>Citation</b></p>
+    <p>If you find this paper useful in your research, please consider citing our work:</p>
+    <div class="bibtex-box">
+      <pre>
+ TODO
+      </pre>
+    </div>
+  </div>
+</body>
+</html>
