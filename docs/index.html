@@ -105,6 +105,19 @@
       text-decoration: underline;
  }
 
+    .paper-btn {
+      background-color: #f3f3f3;
+      text-align: center;
+ }
+
+ .paper-btn img {
+      text-align: center;
+      width: 80px;
+      height: auto;
+      margin-bottom: 15px;
+      margin-top: 8px;
+ }
+
     /* Affiliations */
     .affiliations-container {
       background-color: #f3f3f3;
@@ -140,8 +153,8 @@
       text-align: center;
  }
     .resource-icon {
-      width: 32px;
-      height: 32px;
+      width: 45px;
+      height: auto;
       margin-bottom: 8px;
  }
     .resource-text {
@@ -272,7 +285,18 @@
       <span>Snap Research</span>
     </div>
     <img class="rice-icon" src="./assets/logos/rice.svg" alt="Rice University Logo" style="height: 40px;">
+
+  
   </div>
+
+    <div class="paper-btn">
+    <a href="https://arxiv.org/abs/2311.18822" style="margin-left: 10px; display: inline-block;"><img src="./assets/icons/arxiv-logo.png" alt="Paper" style="vertical-align: middle; margin-left: 5px;" /> </a>
+  </div>
+  
+  <!-- Main Container -->
+  
+      
+
   <div class="disclaimer-box">
     <strong>TL;DR:</strong> 
  Decomposable Flow Matching (DFM) is a simple framework to progressively generate visual modalities scale-by-scale, achieving up to 50% faster convergence compared to Flow Matching.
@@ -283,8 +307,10 @@
      &nbsp; for more details.
   </div>
 
-  <!-- Main Container -->
-  <div class="container">
+  
+<div class="container">
+
+  
     <table width="1000" border="0" align="center">
       <tbody>
         <tr>
@@ -350,7 +376,7 @@
           <td>
             <p style="margin-top: 20px; text-align: justify;">
               Across image and video generation, DFM outperforms the best-performing baselines,
- achieving the same Fréchet Distance DINO (FDD) of Flow Matching baselines with up to 2x less training compute.
+ achieving the same Fréchet DINO Distance (FDD) of Flow Matching baselines with up to 2x less training compute.
             </p>
           </td>
         </tr>
